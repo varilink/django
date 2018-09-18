@@ -441,7 +441,13 @@ A person known to the DATA Diary.
         max_length=15,
     )
 
+    SUBSCRIBER_CHOICES = (
+        ( 1, 'Yes' ) ,
+        ( 0, 'No' ) ,
+    )
     subscriber = models.BooleanField(
+        default=0,
+        choices=SUBSCRIBER_CHOICES,
         help_text="""
 Whether or not the person is subscribed to receive the monthly DATA Diary email.
                   """
@@ -490,12 +496,16 @@ pertain to that assocation.
     organisation_rowid = models.ForeignKey (
         'Organisation',
         db_column='organisation_rowid',
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        verbose_name='Organisation'
     )
 
     role = models.CharField(
         blank=True,
-        help_text="The role that the person has in the organisation.",
+        help_text="""
+The role that the person has in the organisation; for example "Treasurer" of a
+DATA member society.
+                  """,
         max_length=20,
         null=True,
     )
