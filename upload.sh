@@ -1,6 +1,7 @@
 #!/bin/sh
 
 source=$1
+path=/home/david/Django/derbyartsandtheatre
 
 #-------------------------------------------------------------------------------
 
@@ -12,7 +13,11 @@ for f in admin.py apps.py models.py routers.py tests.py views.py
 do
 
 scp \
-$source:/home/david/Django/derbyartsandtheatre/whatson/$f \
+$source:$path/whatson/$f \
 ./whatson/.
 
 done
+
+scp \
+$source:$path/whatson/migrations/0001_initial.py \
+./whatson/migrations/.
