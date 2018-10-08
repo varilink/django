@@ -76,7 +76,7 @@ class PersonsOrganisations ( admin.TabularInline ):
 class EventAdmin ( admin.ModelAdmin ):
     fields = (
         'name', 'dates', 'start_date', 'end_date', 'times', 'society_rowid',
-        'presented_by', 'venue_rowid', 'box_office', 'status', 'card',
+        'presented_by', 'venue_rowid', 'box_office', 'status', 'card', 'image' ,
         'description'
     )
     list_filter = (
@@ -88,7 +88,10 @@ class EventAdmin ( admin.ModelAdmin ):
 admin.site.register ( Event, EventAdmin )
 
 class NewsItemAdmin ( admin.ModelAdmin ):
-    fields = ( 'published_date' , 'title' , 'precis' , 'item_text' )
+    fields = (
+        'published_date' , 'title' , 'image' , 'mailchimp_image' , 'precis' ,
+        'item_text'
+)
     list_display = ( 'published_date' , 'title' )
 admin.site.register ( NewsItem , NewsItemAdmin )
 

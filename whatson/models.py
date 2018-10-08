@@ -23,6 +23,23 @@ A news item published via the website.
         help_text="The title of the news item, limited to 100 characters."
     )
 
+    image = models.TextField (
+        blank=True ,
+        help_text="""
+The path relative to the site root of an image file associated with the news
+item. This will be used to include the image in the news item card.
+                  """
+    )
+
+    mailchimp_image = models.URLField (
+        blank=True ,
+        help_text="""
+The full URL of the image for the news item that's been uploaded to the
+Mailchimp content manager. This is so that it can be included in Mailchimp
+mailshots.
+                  """
+    )
+
     precis = models.CharField (
         max_length=250 ,
         help_text="A one line precis of the news item."
@@ -181,11 +198,16 @@ by a DATA member society.
                   """
     )
 
-    image = models.URLField (
+    image = models.TextField (
         blank=True,
-        null=True,
+        default="",
         help_text="""
-                  The HTML associated with the card image.
+                  The URL associated with the card image. Where this refers to
+an image from another webiste it must be the full URL, including the scheme
+(http or https), e.g.
+"http://www.nlpca.co.uk/blog/wp-content/uploads/2016/10/Theatre-825x510.jpg".
+For uploaded images it must be the path to the image relative to the root URL of
+our site, e.g. "/upload/img/2018_09_24-20:18:11.jpg".
                   """
     )
 

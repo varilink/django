@@ -19,5 +19,5 @@ $source:$path/whatson/$f \
 done
 
 scp \
-$source:$path/whatson/migrations/0001_initial.py \
+$source:$path/whatson/migrations/*.py \
 ./whatson/migrations/.
