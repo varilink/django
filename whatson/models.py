@@ -171,16 +171,16 @@ by a DATA member society.
     )
 
     STATUS_CHOICES = (
-        ( 'PLACEHOLDER' , 'Placeholder' ) ,
-        ( 'CONFIRMED' , 'Confirmed' ) ,
+        ( 'DRAFT' , 'Draft' ) ,
+        ( 'PUBLISHED' , 'Published' ) ,
     )
     status = models.CharField (
         max_length=11,
         choices=STATUS_CHOICES,
         help_text="""
-                  Indicate whether this is a placeholder or whether the event details are confirmed.<br />
-                  Only when the details are confirmed will an event be visible to the public in the DATA Diary.<br />
-                  Placeholders are only visible to DATA Diary administrators as a planning aid. 
+Indicates whether the event has been published or not. Only published events are
+advertised to the public. Draft events are only visible to DATA Diary
+administrators, as a planning aid. 
                   """
     )
 
