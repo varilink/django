@@ -1,0 +1,2 @@
+DIST=/home/david/Django/derbyartsandtheatre/whatson
+EXCLUDES=( '__pycache__' '__init__.py' )

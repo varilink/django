@@ -7,6 +7,8 @@ from whatson.models import Organisation
 from whatson.models import OrganisationFunction
 from whatson.models import Person
 from whatson.models import PersonInOrganisation
+from whatson.models import SocialMediaHandle
+from whatson.models import SocialMediaPlatform
 from whatson.models import User
 
 import datetime
@@ -36,13 +38,15 @@ class EventStartDateListFilter ( admin.SimpleListFilter ):
         if self.value ( ) == 'Month':
             return queryset.filter (
                 start_date__gte = datetime.date.today ( ) ,
-                start_date__lte = datetime.date.today ( ) + relativedelta ( months=1 )
+                start_date__lte = \
+                    datetime.date.today ( ) + relativedelta ( months=1 )
             )
 
         if self.value ( ) == 'SixMonths':
             return queryset.filter (
                 start_date__gte = datetime.date.today ( ) ,
-                start_date__lte = datetime.date.today ( ) + relativedelta ( months=6 )
+                start_date__lte = \
+                    datetime.date.today ( ) + relativedelta ( months=6 )
             )
 
 ################################################################################
@@ -51,19 +55,22 @@ class EventStartDateListFilter ( admin.SimpleListFilter ):
 #                                                                              #
 ################################################################################
 
-class FunctionInline ( admin.TabularInline ):
+class FunctionInline ( admin . TabularInline ) :
     model = OrganisationFunction
 
-class OrganisationInline ( admin.TabularInline ):
+class OrganisationInline ( admin . TabularInline ) :
     model = Organisation
 
-class OrganisationsPersons ( admin.TabularInline ):
-    model = PersonInOrganisation
-    exclude = ( 'status', )
+class SocialMediaHandles ( admin . TabularInline ) :
+    model = SocialMediaHandle
 
-class PersonsOrganisations ( admin.TabularInline ):
+class OrganisationsPersons ( admin . TabularInline ) :
     model = PersonInOrganisation
-    exclude = ( 'status', )
+    exclude = ( 'status' , )
+
+class PersonsOrganisations ( admin . TabularInline ) :
+    model = PersonInOrganisation
+    exclude = ( 'status' , )
     verbose_name = 'Organisation the Person is associated with'
     verbose_name_plural = 'Organisations the Person is associated with'
 
@@ -87,6 +94,11 @@ class EventAdmin ( admin.ModelAdmin ):
 
 admin.site.register ( Event, EventAdmin )
 
+class SocialMediaPlatformAdmin ( admin . ModelAdmin ) :
+    pass
+
+admin.site.register ( SocialMediaPlatform, SocialMediaPlatformAdmin )
+
 class NewsItemAdmin ( admin.ModelAdmin ):
     fields = (
         'published_date' , 'title' , 'image' , 'mailchimp_image' , 'precis' ,
@@ -100,10 +112,10 @@ class OrganisationAdmin(admin.ModelAdmin):
         'name', 'type', 'email', 'website', 'status', 'description', 'address1',
         'address2', 'address3', 'address4', 'postcode'
     )
-    inlines = [ FunctionInline, OrganisationsPersons, ]
+    inlines = [ FunctionInline , OrganisationsPersons , SocialMediaHandles , ]
     list_display = ( 'name' , 'type' , 'status' )
     list_filter = ( 'type', 'status' )
-    search_fields = [ 'name' ] 
+    search_fields = [ 'name' ]
 admin.site.register(Organisation, OrganisationAdmin)
 
 class PersonAdmin(admin.ModelAdmin):
