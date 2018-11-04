@@ -193,7 +193,7 @@ Enter the contact details for Box Office enquiries for the event; for example:
     )
 
     STATUS_CHOICES = (
-        ( 'DRAFT' , 'Draft' ) ,
+        ( 'PLACEHOLDER' , 'Placeholder' ) ,
         ( 'PUBLISHED' , 'Published' ) ,
     )
     status = models.CharField (
@@ -201,7 +201,7 @@ Enter the contact details for Box Office enquiries for the event; for example:
         choices=STATUS_CHOICES,
         help_text="""
 Indicates whether the event has been published or not. Only published events are
-advertised to the public. Draft events are only visible to DATA Diary
+advertised to the public. Placeholder events are only visible to DATA Diary
 administrators, as a planning aid.
                   """
     )

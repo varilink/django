@@ -18,9 +18,7 @@ def event_status ( apps , schema_editor ) :
 
         elif event . status == 'PLACEHOLDER' :
 
-            event . status = 'DRAFT'
-
-            event . save ( )
+            pass
 
         else :
 
