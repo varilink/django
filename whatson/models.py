@@ -33,7 +33,10 @@ the fields of the address are blank. This issue will be resolved at some point.
         ( self.address1 if self.address1 else "" ) + \
         ( ', ' + self.postcode if self.postcode else "" )
 
-    rowid = models.IntegerField (primary_key=True)
+    rowid = models.AutoField (
+        editable = False ,
+        primary_key = True ,
+   )
 
     address1 = models.CharField(
         blank=True,
@@ -83,8 +86,9 @@ a DATA member society.
         return self.start_date.strftime ( '%d/%m/%Y' ) + '-' + \
                self.end_date.strftime ( '%d/%m/%Y' ) + ' ' + self.name
 
-    rowid = models.IntegerField (
-        primary_key=True
+    rowid = models.AutoField (
+        editable = False ,
+        primary_key = True ,
     )
 
     name = models.CharField (
@@ -199,11 +203,10 @@ Enter the contact details for Box Office enquiries for the event; for example:
     status = models.CharField (
         max_length=11,
         choices=STATUS_CHOICES,
-        help_text="""
-Indicates whether the event has been published or not. Only published events are
-advertised to the public. Placeholder events are only visible to DATA Diary
-administrators, as a planning aid.
-                  """
+        help_text="""\
+Indicates whether the event has been published or not. Only published events \
+are advertised to the public. Placeholder events are only visible to DATA \
+Diary administrators, as a planning aid."""
     )
 
     CARD_CHOICES = (
@@ -284,8 +287,9 @@ of those other organisations to link them to persons.
     def __str__ ( self ) :
         return self.name
 
-    rowid = models.IntegerField (
-        primary_key=True
+    rowid = models.AutoField (
+        editable = False ,
+        primary_key = True ,
     )
 
     name = models.CharField(
@@ -377,7 +381,7 @@ own email address.
     def __str__ ( self ) :
         return self . name
 
-    rowid = models . IntegerField (
+    rowid = models.AutoField (
         editable = False ,
         primary_key = True ,
     )
@@ -416,9 +420,9 @@ A person known to the DATA Diary.
     def __str__ ( self ) :
         return self.surname + ', ' + self.first_name
 
-    rowid = models.IntegerField(
-        editable=False,
-        primary_key=True,
+    rowid = models.AutoField (
+        editable = False ,
+        primary_key = True ,
     )
 
     email = models.EmailField(
@@ -492,9 +496,9 @@ pertain to that assocation.
     def __str__ ( self ) :
         return ''
 
-    rowid = models.IntegerField(
-        editable=False,
-        primary_key=True,
+    rowid = models.AutoField (
+        editable = False ,
+        primary_key = True ,
    )
 
     person_rowid = models.ForeignKey (
@@ -652,8 +656,9 @@ class NewsItem ( models.Model ) :
 A news item published via the website.
     """
 
-    rowid = models.IntegerField (
-        primary_key = True
+    rowid = models.AutoField (
+        editable = False ,
+        primary_key = True ,
     )
 
     published_date = models.DateField (
